@@ -68,8 +68,8 @@ module instr_register_test
     // A later lab will replace this function with SystemVerilog
     // constrained random values
     //
-    // The stactic temp variable is required in order to write to fixed
-    // addresses of 0, 1 and 2.  This will be replaceed with randomizeed
+    // The static temp variable is required in order to write to fixed
+    // addresses of 0, 1 and 2.  This will be replaced with randomized
     // write_pointer values in a later lab
     //
     static int temp = 0;
@@ -90,7 +90,8 @@ module instr_register_test
     $display("Read from register location %0d: ", read_pointer);
     $display("  opcode = %0d (%s)", instruction_word.opc, instruction_word.opc.name);
     $display("  operand_a = %0d",   instruction_word.op_a);
-    $display("  operand_b = %0d\n", instruction_word.op_b);
+    $display("  operand_b = %0d",   instruction_word.op_b);
+    $display("  result = %0d\n", instruction_word.result);
   endfunction: print_results
 
 endmodule: instr_register_test
