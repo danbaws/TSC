@@ -19,7 +19,9 @@ module instr_register_test
   );
 
   timeunit 1ns/1ns;
-
+  parameter WRITE_NR=20;
+  parameter READ_NR=20;
+  instruction_t iw_reg_test [0:READ_NR];
   int seed = 555;
 
   initial begin
@@ -39,15 +41,20 @@ module instr_register_test
 
     $display("\nWriting values to register stack...");
     @(posedge clk) load_en = 1'b1;  // enable writing to register
-    repeat (3) begin
+    //repeat (3) begin
+      repeat (WRITE_NR) begin      // 03.06.2024 - Daniel
+      iw_reg_test[write_pointer] = instruction_word;
       @(posedge clk) randomize_transaction;
-      @(negedge clk) print_transaction;
+      @(negedge clk) 
+      print_transaction;
+      //check_result(write_pointer);
     end
     @(posedge clk) load_en = 1'b0;  // turn-off writing to register
 
     // read back and display same three register locations
     $display("\nReading back the same register locations written...");
-    for (int i=0; i<=2; i++) begin
+    //for (int i=0; i<=2; i++) begin
+    for (int i=0; i<=READ_NR; i++) begin        // 03.06.2024 - Daniel
       // later labs will replace this loop with iterating through a
       // scoreboard to determine which addresses were written and
       // the expected values to be read back
@@ -93,5 +100,51 @@ module instr_register_test
     $display("  operand_b = %0d",   instruction_word.op_b);
     $display("  result = %0d\n", instruction_word.result);
   endfunction: print_results
+
+  
+
+  // function void check_result(int index);
+  //   case (iw_reg_test[index].opc)
+  //       ZERO:  begin
+  //         if (iw_reg_test[index].op_a != 0 || iw_reg_test[index].op_b != 0 || iw_reg_test[index].result != 0)
+  //           $display("ERROR: Zero nu a produs 0.");
+  //       end
+  //       PASSA: begin
+  //         if (iw_reg_test[index].op_a != iw_reg_test[index].result || iw_reg_test[index].op_b != 0)
+  //           $display("ERROR: PassA nu a produs operand_a.");
+  //       end
+  //       PASSB: begin
+  //         if (iw_reg_test[index].op_b != iw_reg_test[index].result || iw_reg_test[index].op_a != 0)
+  //           $display("ERROR: PassB nu a produs operand_b.");
+  //       end
+  //       ADD:   begin
+  //         if (iw_reg_test[index].result != iw_reg_test[index].op_a + iw_reg_test[index].op_b)
+  //           $display("ERROR: Adunarea nu a produs rezultatul corect.");
+  //       end
+  //       SUB:   begin
+  //         if (iw_reg_test[index].result != iw_reg_test[index].op_a - iw_reg_test[index].op_b)
+  //           $display("ERROR: Scaderea nu a produs rezultatul corect.");
+  //       end
+  //       MULT:  begin
+  //         if (iw_reg_test[index].result != iw_reg_test[index].op_a * iw_reg_test[index].op_b)
+  //           $display("ERROR: Inmultirea nu a produs rezultatul corect.");
+  //       end
+  //       DIV:   begin
+  //         if (iw_reg_test[index].op_b === 0) begin
+  //             $display("ERROR: Impartire cu 0 la adresa %0d", index);
+  //         end else if(iw_reg_test[index].result !== (iw_reg_test[index].op_a / iw_reg_test[index].op_b)) begin
+  //             $display("ERROR: Impartirea nu a produs rezultatul corect.");
+  //         end
+  //       end
+  //       MOD:   begin
+  //         if (iw_reg_test[index].op_b === 0) begin
+  //             $display("ERROR: Modulo cu 0 la adresa %0d", index);
+  //         end else if (iw_reg_test[index].result !== (iw_reg_test[index].op_a % iw_reg_test[index].op_b)) begin
+  //             $display("ERROR: Modulo nu a produs rezultatul corect.");
+  //         end
+  //       end
+  //       default: $display("ERROR: Opcode negasit la adresa %0d", index);
+  //     endcase
+  // endfunction: check_result
 
 endmodule: instr_register_test

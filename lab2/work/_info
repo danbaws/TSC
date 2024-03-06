@@ -11,7 +11,7 @@ Z0 dC:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2
 vinstr_register
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
 Z2 DXx4 work 18 instr_register_pkg 0 22 ;RQ5]IFSN@UgK^IFYc5Be2
-!s110 1709423659
+!s110 1709710364
 !i10b 1
 !s100 UTh;QXzX;;lV;Na05a[dD3
 IkG]<4giMm9mj3;mbK]9Yh3
@@ -27,7 +27,7 @@ Z4 OV;L;10.5b;63
 r1
 !s85 0
 31
-!s108 1709423659.000000
+!s108 1709710363.000000
 !s107 C:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab_dut/instr_register.sv|
 !s90 -reportprogress|300|-work|work|C:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab_dut/instr_register.sv|
 !i113 1
@@ -35,7 +35,7 @@ Z5 o-work work
 Z6 tCvgOpt 0
 Xinstr_register_pkg
 R1
-!s110 1709423658
+!s110 1709710362
 !i10b 1
 !s100 XYZBdJb<6Uf<MLLFk[0Kc1
 I;RQ5]IFSN@UgK^IFYc5Be2
@@ -50,7 +50,7 @@ R4
 r1
 !s85 0
 31
-!s108 1709423658.000000
+!s108 1709710362.000000
 !s107 C:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab_dut/instr_register_pkg.sv|
 !s90 -reportprogress|300|-work|work|C:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab_dut/instr_register_pkg.sv|
 !i113 1
@@ -59,15 +59,15 @@ R6
 vinstr_register_test
 R1
 R2
-!s110 1709423665
+!s110 1709710796
 !i10b 1
-!s100 EDi?WP4b_Km[C]54?4I241
-IhF;Y69C8:3em`=M`eW8P:1
+!s100 n6JR7gXeU1CiV?D76D]dN3
+IMCN;aHVF[HCdK:KhP@Gl90
 R3
 !s105 instr_register_test_sv_unit
 S1
 R0
-w1709423609
+w1709710787
 8C:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab01_testbench-interface/instr_register_test.sv
 FC:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab01_testbench-interface/instr_register_test.sv
 L0 8
@@ -75,7 +75,7 @@ R4
 r1
 !s85 0
 31
-!s108 1709423665.000000
+!s108 1709710796.000000
 !s107 C:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab01_testbench-interface/instr_register_test.sv|
 !s90 -reportprogress|300|-work|work|C:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab01_testbench-interface/instr_register_test.sv|
 !i113 1
@@ -84,7 +84,7 @@ R6
 vtop
 R1
 R2
-!s110 1709423666
+!s110 1709710694
 !i10b 1
 !s100 Tj`25_lNil0?F<jbd2ab12
 I?eUQA^GzM]`<jV?iS2QJS0
@@ -100,7 +100,7 @@ R4
 r1
 !s85 0
 31
-!s108 1709423666.000000
+!s108 1709710694.000000
 !s107 C:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab01_testbench-interface/top.sv|
 !s90 -reportprogress|300|-work|work|C:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab01_testbench-interface/top.sv|
 !i113 1
