@@ -21,7 +21,10 @@ module instr_register_test
   timeunit 1ns/1ns;
   parameter WRITE_NR=20;
   parameter READ_NR=20;
-  instruction_t iw_reg_test [0:READ_NR];
+  instruction_t iw_reg_test [0:31];
+  parameter READ_ORDER;
+  parameter WRITE_ORDER;
+  result_t rezultat;
   int seed = 555;
 
   initial begin
@@ -43,11 +46,9 @@ module instr_register_test
     @(posedge clk) load_en = 1'b1;  // enable writing to register
     //repeat (3) begin
       repeat (WRITE_NR) begin      // 03.06.2024 - Daniel
-      iw_reg_test[write_pointer] = instruction_word;
       @(posedge clk) randomize_transaction;
       @(negedge clk) 
       print_transaction;
-      //check_result(write_pointer);
     end
     @(posedge clk) load_en = 1'b0;  // turn-off writing to register
 
@@ -60,6 +61,7 @@ module instr_register_test
       // the expected values to be read back
       @(posedge clk) read_pointer = i;
       @(negedge clk) print_results;
+       check_result;
     end
 
     @(posedge clk) ;
@@ -80,10 +82,12 @@ module instr_register_test
     // write_pointer values in a later lab
     //
     static int temp = 0;
-    operand_a     <= $random(seed)%16;                 // between -15 and 15
-    operand_b     <= $unsigned($random)%16;            // between 0 and 15
-    opcode        <= opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
-    write_pointer <= temp++;
+    operand_a     = $random(seed)%16;                 // between -15 and 15
+    operand_b     = $unsigned($random)%16;            // between 0 and 15
+    opcode        = opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
+    write_pointer = temp++;  //0 1 ... etc ramane 0 dupa care iw_reg_test incepe de la 0. temp++ de la 0, ++temp era 1.
+    iw_reg_test[write_pointer] = '{opcode, operand_a, operand_b, {64{1'b0}}};
+    $display("Test: A=%0d, B=%0d, Opcode=%0d", operand_a, operand_b, opcode);
   endfunction: randomize_transaction
 
   function void print_transaction;
@@ -98,53 +102,54 @@ module instr_register_test
     $display("  opcode = %0d (%s)", instruction_word.opc, instruction_word.opc.name);
     $display("  operand_a = %0d",   instruction_word.op_a);
     $display("  operand_b = %0d",   instruction_word.op_b);
-    $display("  result = %0d\n", instruction_word.result);
+    $display("  result = %0d", instruction_word.result);
   endfunction: print_results
 
-  
+  function void check_result;
+    if(instruction_word.op_a === iw_reg_test[read_pointer].op_a && instruction_word.op_b === iw_reg_test[read_pointer].op_b && instruction_word.opc === iw_reg_test[read_pointer].opc) begin
+    case (iw_reg_test[read_pointer].opc)
+        ZERO: begin
+          iw_reg_test[read_pointer].result = 64'b0;
+        end
+        PASSA:  begin
+          iw_reg_test[read_pointer].result = iw_reg_test[read_pointer].op_a;
+        end
+        PASSB:  begin
+          iw_reg_test[read_pointer].result = iw_reg_test[read_pointer].op_b;
+        end
+        ADD:  begin
+          iw_reg_test[read_pointer].result = iw_reg_test[read_pointer].op_a + iw_reg_test[read_pointer].op_b;
+        end
+        SUB:  begin
+          iw_reg_test[read_pointer].result = iw_reg_test[read_pointer].op_a - iw_reg_test[read_pointer].op_b;
+        end
+        MULT: begin
+          iw_reg_test[read_pointer].result = iw_reg_test[read_pointer].op_a * iw_reg_test[read_pointer].op_b;
+        end
+        DIV:  begin
+          if (iw_reg_test[read_pointer].op_b === 0) begin
+              iw_reg_test[read_pointer].result = 64'b0;
+          end else begin
+              iw_reg_test[read_pointer].result = iw_reg_test[read_pointer].op_a / iw_reg_test[read_pointer].op_b;    
+          end
+        end
+        MOD:  begin
+          if (iw_reg_test[read_pointer].op_b === 0) begin
+              iw_reg_test[read_pointer].result = 64'b0;
+          end else begin
+              iw_reg_test[read_pointer].result = iw_reg_test[read_pointer].op_a % iw_reg_test[read_pointer].op_b;
+          end
+        end
+        default: iw_reg_test[read_pointer].result = 64'hxxxx_xxxx;
+      endcase
 
-  // function void check_result(int index);
-  //   case (iw_reg_test[index].opc)
-  //       ZERO:  begin
-  //         if (iw_reg_test[index].op_a != 0 || iw_reg_test[index].op_b != 0 || iw_reg_test[index].result != 0)
-  //           $display("ERROR: Zero nu a produs 0.");
-  //       end
-  //       PASSA: begin
-  //         if (iw_reg_test[index].op_a != iw_reg_test[index].result || iw_reg_test[index].op_b != 0)
-  //           $display("ERROR: PassA nu a produs operand_a.");
-  //       end
-  //       PASSB: begin
-  //         if (iw_reg_test[index].op_b != iw_reg_test[index].result || iw_reg_test[index].op_a != 0)
-  //           $display("ERROR: PassB nu a produs operand_b.");
-  //       end
-  //       ADD:   begin
-  //         if (iw_reg_test[index].result != iw_reg_test[index].op_a + iw_reg_test[index].op_b)
-  //           $display("ERROR: Adunarea nu a produs rezultatul corect.");
-  //       end
-  //       SUB:   begin
-  //         if (iw_reg_test[index].result != iw_reg_test[index].op_a - iw_reg_test[index].op_b)
-  //           $display("ERROR: Scaderea nu a produs rezultatul corect.");
-  //       end
-  //       MULT:  begin
-  //         if (iw_reg_test[index].result != iw_reg_test[index].op_a * iw_reg_test[index].op_b)
-  //           $display("ERROR: Inmultirea nu a produs rezultatul corect.");
-  //       end
-  //       DIV:   begin
-  //         if (iw_reg_test[index].op_b === 0) begin
-  //             $display("ERROR: Impartire cu 0 la adresa %0d", index);
-  //         end else if(iw_reg_test[index].result !== (iw_reg_test[index].op_a / iw_reg_test[index].op_b)) begin
-  //             $display("ERROR: Impartirea nu a produs rezultatul corect.");
-  //         end
-  //       end
-  //       MOD:   begin
-  //         if (iw_reg_test[index].op_b === 0) begin
-  //             $display("ERROR: Modulo cu 0 la adresa %0d", index);
-  //         end else if (iw_reg_test[index].result !== (iw_reg_test[index].op_a % iw_reg_test[index].op_b)) begin
-  //             $display("ERROR: Modulo nu a produs rezultatul corect.");
-  //         end
-  //       end
-  //       default: $display("ERROR: Opcode negasit la adresa %0d", index);
-  //     endcase
-  // endfunction: check_result
+
+      if(iw_reg_test[read_pointer].result === instruction_word.result) begin
+        $display("Rezultatul este corect!\n");
+      end else begin
+        $display("Rezultatul este gresit!\n");
+      end
+    end 
+  endfunction: check_result
 
 endmodule: instr_register_test

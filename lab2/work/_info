@@ -59,15 +59,15 @@ R6
 vinstr_register_test
 R1
 R2
-!s110 1709710796
+!s110 1710314906
 !i10b 1
-!s100 n6JR7gXeU1CiV?D76D]dN3
-IMCN;aHVF[HCdK:KhP@Gl90
+!s100 HZ2bTa]VFfcYR=Gb^SUYa2
+IPfoM00H[?ng:DaOb4Q2`[2
 R3
 !s105 instr_register_test_sv_unit
 S1
 R0
-w1709710787
+w1710314896
 8C:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab01_testbench-interface/instr_register_test.sv
 FC:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab01_testbench-interface/instr_register_test.sv
 L0 8
@@ -75,7 +75,7 @@ R4
 r1
 !s85 0
 31
-!s108 1709710796.000000
+!s108 1710314906.000000
 !s107 C:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab01_testbench-interface/instr_register_test.sv|
 !s90 -reportprogress|300|-work|work|C:/Users/dannd/Desktop/Verilog-An4/TSC/lab2/TSC/lab2/lab01_testbench-interface/instr_register_test.sv|
 !i113 1
