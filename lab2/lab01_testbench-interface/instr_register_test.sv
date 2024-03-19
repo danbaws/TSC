@@ -22,18 +22,18 @@ module instr_register_test
   parameter WRITE_NR=20;
   parameter READ_NR=20;
   instruction_t iw_reg_test [0:31];
-  parameter READ_ORDER;
-  parameter WRITE_ORDER;
-  result_t rezultat;
+  int READ_ORDER=2;
+  int WRITE_ORDER=2;
+  int trecut=0;
+  int teste=0;
   int seed = 555;
 
   initial begin
     $display("\n\n***********************************************************");
-    $display(    "***  THIS IS NOT A SELF-CHECKING TESTBENCH (YET).  YOU  ***");
+    $display(    "***  THIS IS A SELF-CHECKING TESTBENCH (YET).  YOU      ***");
     $display(    "***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
     $display(    "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
     $display(    "***********************************************************");
-
     $display("\nReseting the instruction register...");
     write_pointer  = 5'h00;         // initialize write pointer
     read_pointer   = 5'h1F;         // initialize read pointer
@@ -59,7 +59,14 @@ module instr_register_test
       // later labs will replace this loop with iterating through a
       // scoreboard to determine which addresses were written and
       // the expected values to be read back
-      @(posedge clk) read_pointer = i;
+
+      case(READ_ORDER)
+        0: @(posedge clk) read_pointer = i; // increasing
+        1: @(posedge clk) read_pointer = 31 - i; // decreasing
+        2: @(posedge clk) read_pointer = $unsigned($random)%32; // Random de la 0 la 31
+        default: @(posedge clk) read_pointer = i; // crescator default
+      endcase
+      // @(posedge clk) read_pointer = i;
       @(negedge clk) print_results;
        check_result;
     end
@@ -70,6 +77,7 @@ module instr_register_test
     $display(  "***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
     $display(  "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
     $display(  "***********************************************************\n");
+     $display("\nAu trecut: %0d. Din totalul de teste: %0d.", trecut, teste);
     $finish;
   end
 
@@ -81,11 +89,29 @@ module instr_register_test
     // addresses of 0, 1 and 2.  This will be replaced with randomized
     // write_pointer values in a later lab
     //
-    static int temp = 0;
+    // static int temp = 0;
     operand_a     = $random(seed)%16;                 // between -15 and 15
     operand_b     = $unsigned($random)%16;            // between 0 and 15
     opcode        = opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
-    write_pointer = temp++;  //0 1 ... etc ramane 0 dupa care iw_reg_test incepe de la 0. temp++ de la 0, ++temp era 1.
+    // write_pointer = temp++;  //0 1 ... etc ramane 0 dupa care iw_reg_test incepe de la 0. temp++ de la 0, ++temp era 1.
+    case(WRITE_ORDER)
+    0: begin  //increasing
+      static int temp = 0;
+      write_pointer = temp++;
+    end
+    1: begin //decreasing
+      static int temp = 31;
+      write_pointer = temp--;
+    end
+    2: begin //random
+      write_pointer = $unsigned($random)%32;
+    end
+    default: begin // crescator default
+      static int temp = 0;
+      write_pointer = temp++;
+    end
+  endcase
+
     iw_reg_test[write_pointer] = '{opcode, operand_a, operand_b, {64{1'b0}}};
     $display("Test: A=%0d, B=%0d, Opcode=%0d", operand_a, operand_b, opcode);
   endfunction: randomize_transaction
@@ -106,7 +132,7 @@ module instr_register_test
   endfunction: print_results
 
   function void check_result;
-    if(instruction_word.op_a === iw_reg_test[read_pointer].op_a && instruction_word.op_b === iw_reg_test[read_pointer].op_b && instruction_word.opc === iw_reg_test[read_pointer].opc) begin
+    if(instruction_word.op_a === iw_reg_test[read_pointer].op_a && instruction_word.op_b === iw_reg_test[read_pointer].op_b && instruction_word.opc === iw_reg_test[read_pointer].opc) begin //primul if
     case (iw_reg_test[read_pointer].opc)
         ZERO: begin
           iw_reg_test[read_pointer].result = 64'b0;
@@ -146,10 +172,11 @@ module instr_register_test
 
       if(iw_reg_test[read_pointer].result === instruction_word.result) begin
         $display("Rezultatul este corect!\n");
+        trecut++;
       end else begin
         $display("Rezultatul este gresit!\n");
       end
-    end 
+      teste=READ_NR;
+    end //inchidem primul if
   endfunction: check_result
-
 endmodule: instr_register_test
