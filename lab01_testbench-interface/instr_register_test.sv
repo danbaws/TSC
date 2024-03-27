@@ -22,8 +22,8 @@ module instr_register_test
   parameter WRITE_NR=20;
   parameter READ_NR=20;
   instruction_t iw_reg_test [0:31];
-  int READ_ORDER=2;
-  int WRITE_ORDER=2;
+  parameter READ_ORDER=1;
+  parameter WRITE_ORDER=1;
   int trecut=0;
   int teste=0;
   int seed = 555;
@@ -62,7 +62,7 @@ module instr_register_test
 
       case(READ_ORDER)
         0: @(posedge clk) read_pointer = i; // increasing
-        1: @(posedge clk) read_pointer = 31 - i; // decreasing
+        1: @(posedge clk) read_pointer = 31 - i%32; // decreasing
         2: @(posedge clk) read_pointer = $unsigned($random)%32; // Random de la 0 la 31
         default: @(posedge clk) read_pointer = i; // crescator default
       endcase
