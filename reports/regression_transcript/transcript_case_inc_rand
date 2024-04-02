@@ -1,6 +1,6 @@
 # 1
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 13:45:41 on Apr 02,2024
+# Start time: 13:45:45 on Apr 02,2024
 # vlog -sv -timescale 1ps/1ps -work work -f sources.txt 
 # -- Compiling package instr_register_pkg
 # -- Compiling module instr_register
@@ -11,10 +11,10 @@
 # 
 # Top level modules:
 # 	top
-# End time: 13:45:41 on Apr 02,2024, Elapsed time: 0:00:00
+# End time: 13:45:45 on Apr 02,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GWRITE_ORDER=0 -GWRITE_NR=50 -GREAD_ORDER=0 -GREAD_NR=50 
-# Start time: 13:45:41 on Apr 02,2024
+# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GWRITE_ORDER=0 -GWRITE_NR=40 -GREAD_ORDER=2 -GREAD_NR=40 
+# Start time: 13:45:45 on Apr 02,2024
 # 
 # 
 # ***********************************************************
@@ -266,87 +266,13 @@
 #   operand_a = -9
 #   operand_b = 1
 # 
-# Test: A=-15, B=13, Opcode=6
-# Writing to register location 8: 
-#   opcode = 6 (DIV)
-#   operand_a = -15
-#   operand_b = 13
-# 
-# Test: A=-3, B=6, Opcode=3
-# Writing to register location 9: 
-#   opcode = 3 (ADD)
-#   operand_a = -3
-#   operand_b = 6
-# 
-# Test: A=6, B=3, Opcode=3
-# Writing to register location 10: 
-#   opcode = 3 (ADD)
-#   operand_a = 6
-#   operand_b = 3
-# 
-# Test: A=-13, B=11, Opcode=1
-# Writing to register location 11: 
-#   opcode = 1 (PASSA)
-#   operand_a = -13
-#   operand_b = 11
-# 
-# Test: A=11, B=1, Opcode=7
-# Writing to register location 12: 
-#   opcode = 7 (MOD)
-#   operand_a = 11
-#   operand_b = 1
-# 
-# Test: A=-15, B=15, Opcode=5
-# Writing to register location 13: 
-#   opcode = 5 (MULT)
-#   operand_a = -15
-#   operand_b = 15
-# 
-# Test: A=15, B=13, Opcode=1
-# Writing to register location 14: 
-#   opcode = 1 (PASSA)
-#   operand_a = 15
-#   operand_b = 13
-# 
-# Test: A=-3, B=1, Opcode=7
-# Writing to register location 15: 
-#   opcode = 7 (MOD)
-#   operand_a = -3
-#   operand_b = 1
-# 
-# Test: A=1, B=15, Opcode=0
-# Writing to register location 16: 
-#   opcode = 0 (ZERO)
-#   operand_a = 1
-#   operand_b = 15
-# 
-# Test: A=15, B=0, Opcode=6
-# Writing to register location 17: 
-#   opcode = 6 (DIV)
-#   operand_a = 15
-#   operand_b = 0
-# 
 # 
 # Reading back the same register locations written...
-# Read from register location 0: 
-#   opcode = 2 (PASSB)
-#   operand_a = -4
-#   operand_b = 8
-#   result = 8
-# Rezultatul este corect!
-# 
-# Read from register location 1: 
-#   opcode = 2 (PASSB)
-#   operand_a = 8
-#   operand_b = 10
-#   result = 10
-# Rezultatul este corect!
-# 
-# Read from register location 2: 
-#   opcode = 6 (DIV)
-#   operand_a = -6
-#   operand_b = 2
-#   result = -3
+# Read from register location 22: 
+#   opcode = 1 (PASSA)
+#   operand_a = -15
+#   operand_b = 1
+#   result = -15
 # Rezultatul este corect!
 # 
 # Read from register location 3: 
@@ -356,130 +282,53 @@
 #   result = 2
 # Rezultatul este corect!
 # 
-# Read from register location 4: 
-#   opcode = 4 (SUB)
-#   operand_a = 14
-#   operand_b = 9
-#   result = 5
-# Rezultatul este corect!
-# 
-# Read from register location 5: 
-#   opcode = 7 (MOD)
-#   operand_a = -7
-#   operand_b = 12
-#   result = -7
-# Rezultatul este corect!
-# 
-# Read from register location 6: 
-#   opcode = 1 (PASSA)
-#   operand_a = 12
-#   operand_b = 7
-#   result = 12
-# Rezultatul este corect!
-# 
-# Read from register location 7: 
-#   opcode = 5 (MULT)
-#   operand_a = -9
-#   operand_b = 1
-#   result = -9
-# Rezultatul este corect!
-# 
-# Read from register location 8: 
-#   opcode = 6 (DIV)
-#   operand_a = -15
-#   operand_b = 13
-#   result = -1
-# Rezultatul este corect!
-# 
-# Read from register location 9: 
-#   opcode = 3 (ADD)
-#   operand_a = -3
-#   operand_b = 6
-#   result = 3
-# Rezultatul este corect!
-# 
-# Read from register location 10: 
-#   opcode = 3 (ADD)
-#   operand_a = 6
-#   operand_b = 3
-#   result = 9
-# Rezultatul este corect!
-# 
 # Read from register location 11: 
-#   opcode = 1 (PASSA)
-#   operand_a = -13
-#   operand_b = 11
-#   result = -13
+#   opcode = 3 (ADD)
+#   operand_a = 9
+#   operand_b = 7
+#   result = 16
 # Rezultatul este corect!
 # 
-# Read from register location 12: 
-#   opcode = 7 (MOD)
-#   operand_a = 11
-#   operand_b = 1
-#   result = 0
-# Rezultatul este corect!
-# 
-# Read from register location 13: 
-#   opcode = 5 (MULT)
-#   operand_a = -15
-#   operand_b = 15
-#   result = -225
-# Rezultatul este corect!
-# 
-# Read from register location 14: 
-#   opcode = 1 (PASSA)
-#   operand_a = 15
-#   operand_b = 13
-#   result = 15
+# Read from register location 1: 
+#   opcode = 2 (PASSB)
+#   operand_a = 8
+#   operand_b = 10
+#   result = 10
 # Rezultatul este corect!
 # 
 # Read from register location 15: 
-#   opcode = 7 (MOD)
-#   operand_a = -3
-#   operand_b = 1
-#   result = 0
-# Rezultatul este corect!
-# 
-# Read from register location 16: 
-#   opcode = 0 (ZERO)
-#   operand_a = 1
-#   operand_b = 15
-#   result = 0
-# Rezultatul este corect!
-# 
-# Read from register location 17: 
 #   opcode = 6 (DIV)
 #   operand_a = 15
 #   operand_b = 0
 #   result = x
 # Rezultatul este gresit!
 # 
-# Read from register location 18: 
-#   opcode = 0 (ZERO)
-#   operand_a = -12
-#   operand_b = 3
-#   result = 0
+# Read from register location 13: 
+#   opcode = 7 (MOD)
+#   operand_a = 3
+#   operand_b = 5
+#   result = 3
 # Rezultatul este corect!
 # 
-# Read from register location 19: 
-#   opcode = 4 (SUB)
-#   operand_a = -13
-#   operand_b = 8
-#   result = -21
+# Read from register location 17: 
+#   opcode = 3 (ADD)
+#   operand_a = -2
+#   operand_b = 4
+#   result = 2
 # Rezultatul este corect!
 # 
-# Read from register location 20: 
-#   opcode = 1 (PASSA)
-#   operand_a = -8
-#   operand_b = 12
-#   result = -8
-# Rezultatul este corect!
+# Read from register location 15: 
+#   opcode = 6 (DIV)
+#   operand_a = 15
+#   operand_b = 0
+#   result = x
+# Rezultatul este gresit!
 # 
-# Read from register location 21: 
-#   opcode = 1 (PASSA)
+# Read from register location 0: 
+#   opcode = 2 (PASSB)
 #   operand_a = -4
-#   operand_b = 1
-#   result = -4
+#   operand_b = 8
+#   result = 8
 # Rezultatul este corect!
 # 
 # Read from register location 22: 
@@ -489,10 +338,52 @@
 #   result = -15
 # Rezultatul este corect!
 # 
-# Read from register location 23: 
-#   opcode = 7 (MOD)
-#   operand_a = 1
+# Read from register location 15: 
+#   opcode = 6 (DIV)
+#   operand_a = 15
+#   operand_b = 0
+#   result = x
+# Rezultatul este gresit!
+# 
+# Read from register location 11: 
+#   opcode = 3 (ADD)
+#   operand_a = 9
+#   operand_b = 7
+#   result = 16
+# Rezultatul este corect!
+# 
+# Read from register location 29: 
+#   opcode = 3 (ADD)
+#   operand_a = 12
+#   operand_b = 5
+#   result = 17
+# Rezultatul este corect!
+# 
+# Read from register location 7: 
+#   opcode = 5 (MULT)
+#   operand_a = -9
 #   operand_b = 1
+#   result = -9
+# Rezultatul este corect!
+# 
+# Read from register location 13: 
+#   opcode = 7 (MOD)
+#   operand_a = 3
+#   operand_b = 5
+#   result = 3
+# Rezultatul este corect!
+# 
+# Read from register location 24: 
+#   opcode = 5 (MULT)
+#   operand_a = 1
+#   operand_b = 15
+#   result = 15
+# Rezultatul este corect!
+# 
+# Read from register location 10: 
+#   opcode = 7 (MOD)
+#   operand_a = 9
+#   operand_b = 9
 #   result = 0
 # Rezultatul este corect!
 # 
@@ -503,6 +394,20 @@
 #   result = 15
 # Rezultatul este corect!
 # 
+# Read from register location 18: 
+#   opcode = 0 (ZERO)
+#   operand_a = -12
+#   operand_b = 3
+#   result = 0
+# Rezultatul este corect!
+# 
+# Read from register location 17: 
+#   opcode = 3 (ADD)
+#   operand_a = -2
+#   operand_b = 4
+#   result = 2
+# Rezultatul este corect!
+# 
 # Read from register location 25: 
 #   opcode = 7 (MOD)
 #   operand_a = -1
@@ -510,11 +415,60 @@
 #   result = -1
 # Rezultatul este corect!
 # 
-# Read from register location 26: 
+# Read from register location 5: 
+#   opcode = 7 (MOD)
+#   operand_a = -7
+#   operand_b = 12
+#   result = -7
+# Rezultatul este corect!
+# 
+# Read from register location 17: 
+#   opcode = 3 (ADD)
+#   operand_a = -2
+#   operand_b = 4
+#   result = 2
+# Rezultatul este corect!
+# 
+# Read from register location 30: 
 #   opcode = 4 (SUB)
-#   operand_a = 5
-#   operand_b = 7
-#   result = -2
+#   operand_a = -11
+#   operand_b = 11
+#   result = -22
+# Rezultatul este corect!
+# 
+# Read from register location 29: 
+#   opcode = 3 (ADD)
+#   operand_a = 12
+#   operand_b = 5
+#   result = 17
+# Rezultatul este corect!
+# 
+# Read from register location 30: 
+#   opcode = 4 (SUB)
+#   operand_a = -11
+#   operand_b = 11
+#   result = -22
+# Rezultatul este corect!
+# 
+# Read from register location 20: 
+#   opcode = 1 (PASSA)
+#   operand_a = -8
+#   operand_b = 12
+#   result = -8
+# Rezultatul este corect!
+# 
+# Read from register location 5: 
+#   opcode = 7 (MOD)
+#   operand_a = -7
+#   operand_b = 12
+#   result = -7
+# Rezultatul este corect!
+# 
+# Read from register location 1: 
+#   opcode = 2 (PASSB)
+#   operand_a = 8
+#   operand_b = 10
+#   result = 10
 # Rezultatul este corect!
 # 
 # Read from register location 27: 
@@ -538,6 +492,27 @@
 #   result = 17
 # Rezultatul este corect!
 # 
+# Read from register location 7: 
+#   opcode = 5 (MULT)
+#   operand_a = -9
+#   operand_b = 1
+#   result = -9
+# Rezultatul este corect!
+# 
+# Read from register location 29: 
+#   opcode = 3 (ADD)
+#   operand_a = 12
+#   operand_b = 5
+#   result = 17
+# Rezultatul este corect!
+# 
+# Read from register location 16: 
+#   opcode = 4 (SUB)
+#   operand_a = 0
+#   operand_b = 14
+#   result = -14
+# Rezultatul este corect!
+# 
 # Read from register location 30: 
 #   opcode = 4 (SUB)
 #   operand_a = -11
@@ -545,25 +520,11 @@
 #   result = -22
 # Rezultatul este corect!
 # 
-# Read from register location 31: 
-#   opcode = 0 (ZERO)
-#   operand_a = 11
+# Read from register location 28: 
+#   opcode = 5 (MULT)
+#   operand_a = 4
 #   operand_b = 12
-#   result = 0
-# Rezultatul este corect!
-# 
-# Read from register location 0: 
-#   opcode = 2 (PASSB)
-#   operand_a = -4
-#   operand_b = 8
-#   result = 8
-# Rezultatul este corect!
-# 
-# Read from register location 1: 
-#   opcode = 2 (PASSB)
-#   operand_a = 8
-#   operand_b = 10
-#   result = 10
+#   result = 48
 # Rezultatul este corect!
 # 
 # Read from register location 2: 
@@ -573,116 +534,25 @@
 #   result = -3
 # Rezultatul este corect!
 # 
-# Read from register location 3: 
-#   opcode = 1 (PASSA)
-#   operand_a = 2
-#   operand_b = 14
-#   result = 2
-# Rezultatul este corect!
-# 
-# Read from register location 4: 
-#   opcode = 4 (SUB)
-#   operand_a = 14
-#   operand_b = 9
-#   result = 5
-# Rezultatul este corect!
-# 
-# Read from register location 5: 
-#   opcode = 7 (MOD)
-#   operand_a = -7
-#   operand_b = 12
-#   result = -7
-# Rezultatul este corect!
-# 
-# Read from register location 6: 
-#   opcode = 1 (PASSA)
-#   operand_a = 12
-#   operand_b = 7
-#   result = 12
-# Rezultatul este corect!
-# 
-# Read from register location 7: 
-#   opcode = 5 (MULT)
-#   operand_a = -9
-#   operand_b = 1
-#   result = -9
-# Rezultatul este corect!
-# 
-# Read from register location 8: 
-#   opcode = 6 (DIV)
-#   operand_a = -15
-#   operand_b = 13
-#   result = -1
-# Rezultatul este corect!
-# 
-# Read from register location 9: 
-#   opcode = 3 (ADD)
-#   operand_a = -3
-#   operand_b = 6
-#   result = 3
-# Rezultatul este corect!
-# 
-# Read from register location 10: 
-#   opcode = 3 (ADD)
-#   operand_a = 6
-#   operand_b = 3
-#   result = 9
-# Rezultatul este corect!
-# 
-# Read from register location 11: 
-#   opcode = 1 (PASSA)
-#   operand_a = -13
-#   operand_b = 11
-#   result = -13
-# Rezultatul este corect!
-# 
-# Read from register location 12: 
-#   opcode = 7 (MOD)
-#   operand_a = 11
-#   operand_b = 1
-#   result = 0
-# Rezultatul este corect!
-# 
-# Read from register location 13: 
-#   opcode = 5 (MULT)
-#   operand_a = -15
-#   operand_b = 15
-#   result = -225
-# Rezultatul este corect!
-# 
-# Read from register location 14: 
-#   opcode = 1 (PASSA)
-#   operand_a = 15
-#   operand_b = 13
-#   result = 15
-# Rezultatul este corect!
-# 
 # Read from register location 15: 
-#   opcode = 7 (MOD)
-#   operand_a = -3
-#   operand_b = 1
-#   result = 0
-# Rezultatul este corect!
-# 
-# Read from register location 16: 
-#   opcode = 0 (ZERO)
-#   operand_a = 1
-#   operand_b = 15
-#   result = 0
-# Rezultatul este corect!
-# 
-# Read from register location 17: 
 #   opcode = 6 (DIV)
 #   operand_a = 15
 #   operand_b = 0
 #   result = x
 # Rezultatul este gresit!
 # 
-# Read from register location 18: 
-#   opcode = 0 (ZERO)
-#   operand_a = -12
-#   operand_b = 3
-#   result = 0
+# Read from register location 13: 
+#   opcode = 7 (MOD)
+#   operand_a = 3
+#   operand_b = 5
+#   result = 3
+# Rezultatul este corect!
+# 
+# Read from register location 0: 
+#   opcode = 2 (PASSB)
+#   operand_a = -4
+#   operand_b = 8
+#   result = 8
 # Rezultatul este corect!
 # 
 # 
@@ -693,8 +563,8 @@
 # ***********************************************************
 # 
 # 
-# Au trecut: 49. Din totalul de teste: 50.
+# Au trecut: 37. Din totalul de teste: 40.
 # ** Note: $finish    : ../lab01_testbench-interface/instr_register_test.sv(81)
-#    Time: 1056 ns  Iteration: 1  Instance: /top/test
-# End time: 13:45:42 on Apr 02,2024, Elapsed time: 0:00:01
+#    Time: 856 ns  Iteration: 1  Instance: /top/test
+# End time: 13:45:46 on Apr 02,2024, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
