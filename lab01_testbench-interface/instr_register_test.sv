@@ -26,7 +26,8 @@ module instr_register_test
   parameter WRITE_ORDER=1;
   int trecut=0;
   int teste=0;
-  int seed = 555;
+  parameter SEED_VAL=555;
+  int seed = SEED_VAL;
 
   initial begin
     $display("\n\n***********************************************************");
@@ -78,6 +79,11 @@ module instr_register_test
     $display(  "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
     $display(  "***********************************************************\n");
      $display("\nAu trecut: %0d. Din totalul de teste: %0d.", trecut, teste);
+     if(trecut === teste) begin
+        $display("Toate testele au trecut cu succes!");
+      end else begin
+        $display("Nu toate testele au trecut cu succes!");
+      end
     $finish;
   end
 
@@ -179,4 +185,20 @@ module instr_register_test
       teste=READ_NR;
     end //inchidem primul if
   endfunction: check_result
+
+    function void write_to_file;
+    int fd;
+
+    fd = $fopen("../reports/regression_status.txt", "a");
+    if(passed_tests == total_tests) begin
+      $fdisplay(fd, "%s : passed", TEST_NAME);
+    end
+    else begin
+      $fdisplay(fd, "%s : failed", TEST_NAME);
+    end
+
+    $fclose(fd);
+
+  endfunction: write_to_file
+  
 endmodule: instr_register_test

@@ -1,7 +1,0 @@
-opcode - op , a , b
-
-schimbam in - op, a , b , rezultat
-
-si un case pt calcule
-zero : rez = 0
-add : rez = a + b
