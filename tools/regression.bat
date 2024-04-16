@@ -8,6 +8,16 @@
 @REM call run_test.bat 70 70 2 1 case_rand_dec
 @REM call run_test.bat 80 80 2 2 case_rand_rand
 
-call run_test 50 32 2 2 CASE1 555
-call run_test 50 32 2 2 CASE2 732
-call run_test 50 32 2 2 CASE3 682
+@REM code to remove all files from directory ../reports/regression_transcript:
+del /Q /S "..\reports\regression_transcript\*"
+del /Q /S "..\reports\*.txt"
+
+call run_test 50 32 2 2 CASE1 555 cli
+call run_test 50 32 2 2 CASE2 732 cli
+call run_test 50 32 2 2 CASE3 682 cli
+call run_test 50 32 2 2 CASE4 123 cli
+call run_test 50 32 2 2 CASE5 456 cli
+call run_test 50 32 2 2 CASE6 789 cli
+call run_test 120 32 2 2 CASE7 321 cli
+call run_test 130 32 2 2 CASE9 987 cli
+call run_test 120 32 2 2 CASE10 654 cli

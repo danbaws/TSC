@@ -7,8 +7,15 @@ cd ../sim
 ::vsim -gui -do run.do %1
 ::vsim -c -do run.do
 
-
-vsim -c -do "do run.do %1 %2 %3 %4 %5 %6"
+if "%7" == "gui" (
+    vsim -gui -do "do run.do %1 %2 %3 %4 %5 %6" 
+) else (
+    if "%7" == "cli" (
+        vsim -c -do "do run.do %1 %2 %3 %4 %5 %6" 
+    ) else (
+        echo "GUI or CLI? Neither."
+    )
+)
 :: vsim -pvalue WRITE_NR
 
 cd ../tools

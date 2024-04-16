@@ -1,6 +1,6 @@
 # 1
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 09:05:58 on Apr 10,2024
+# Start time: 14:48:49 on Apr 16,2024
 # vlog -sv -timescale 1ps/1ps -work work -f sources.txt 
 # -- Compiling package instr_register_pkg
 # -- Compiling module instr_register
@@ -11,10 +11,10 @@
 # 
 # Top level modules:
 # 	top
-# End time: 09:05:58 on Apr 10,2024, Elapsed time: 0:00:00
+# End time: 14:48:49 on Apr 16,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GWRITE_ORDER=2 -GWRITE_NR=50 -GSEED_VAL=555 -GREAD_ORDER=2 -GREAD_NR=32 
-# Start time: 09:05:58 on Apr 10,2024
+# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GTEST=CASE1 -GWRITE_ORDER=2 -GWRITE_NR=50 -GSEED_VAL=555 -GREAD_ORDER=2 -GREAD_NR=32 
+# Start time: 14:48:49 on Apr 16,2024
 # 
 # 
 # ***********************************************************
@@ -431,8 +431,8 @@
 #   opcode = 6 (DIV)
 #   operand_a = 15
 #   operand_b = 0
-#   result = x
-# Rezultatul este gresit!
+#   result = 0
+# Rezultatul este corect!
 # 
 # Read from register location 5: 
 #   opcode = 3 (ADD)
@@ -509,8 +509,8 @@
 #   opcode = 6 (DIV)
 #   operand_a = 15
 #   operand_b = 0
-#   result = x
-# Rezultatul este gresit!
+#   result = 0
+# Rezultatul este corect!
 # 
 # Read from register location 13: 
 #   opcode = 7 (MOD)
@@ -551,9 +551,8 @@
 # ***********************************************************
 # 
 # 
-# Au trecut: 23. Din totalul de teste: 32.
-# Nu toate testele au trecut cu succes!
-# ** Note: $finish    : ../lab01_testbench-interface/instr_register_test.sv(87)
+# Au trecut: 25. Din totalul de teste: 32.
+# ** Note: $finish    : ../lab01_testbench-interface/instr_register_test.sv(84)
 #    Time: 876 ns  Iteration: 1  Instance: /top/test
-# End time: 09:05:58 on Apr 10,2024, Elapsed time: 0:00:00
+# End time: 14:48:49 on Apr 16,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0

@@ -24,6 +24,7 @@ module instr_register_test
   instruction_t iw_reg_test [0:31];
   parameter READ_ORDER=1;
   parameter WRITE_ORDER=1;
+  parameter TEST="nume_test";
   int trecut=0;
   int teste=0;
   parameter SEED_VAL=555;
@@ -79,12 +80,8 @@ module instr_register_test
     $display(  "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
     $display(  "***********************************************************\n");
      $display("\nAu trecut: %0d. Din totalul de teste: %0d.", trecut, teste);
-     if(trecut === teste) begin
-        $display("Toate testele au trecut cu succes!");
-      end else begin
-        $display("Nu toate testele au trecut cu succes!");
-      end
-    $finish;
+     write_to_file;
+     $finish;
   end
 
   function void randomize_transaction;
@@ -172,7 +169,10 @@ module instr_register_test
               iw_reg_test[read_pointer].result = iw_reg_test[read_pointer].op_a % iw_reg_test[read_pointer].op_b;
           end
         end
-        default: iw_reg_test[read_pointer].result = 64'hxxxx_xxxx;
+        POW:  begin
+          iw_reg_test[read_pointer].result = iw_reg_test[read_pointer].op_a ** iw_reg_test[read_pointer].op_b;
+        end
+        default: iw_reg_test[read_pointer].result = 64'b0;
       endcase
 
 
@@ -190,11 +190,11 @@ module instr_register_test
     int fd;
 
     fd = $fopen("../reports/regression_status.txt", "a");
-    if(passed_tests == total_tests) begin
-      $fdisplay(fd, "%s : passed", TEST_NAME);
+    if(trecut == teste) begin
+      $fdisplay(fd, "%s : passed", TEST);
     end
     else begin
-      $fdisplay(fd, "%s : failed", TEST_NAME);
+      $fdisplay(fd, "%s : failed", TEST);
     end
 
     $fclose(fd);
